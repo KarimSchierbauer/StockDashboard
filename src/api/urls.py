@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework.authtoken.views import obtain_auth_token
 
-from core.views import TestView, SymbolView, StockView
+from core.views import TestView, SymbolView, StockView, SymbolViewByName, StocksViewByName
 
 urlpatterns = [
     path('api-auth/', include('rest_framework.urls')),
@@ -26,6 +26,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', TestView.as_view(), name='test'),
     path('symbol/', SymbolView.as_view(), name='symbol'),
+    path('symbolsearch/<str:pk>/', SymbolViewByName.as_view(), name='symbolname'),
+    path('stocksearch/<str:pk>/', StocksViewByName.as_view(), name='stockname'),
     path('stock/', StockView.as_view(), name='stock'),
     path('api/token/', obtain_auth_token, name='obtain-token')
 ]
